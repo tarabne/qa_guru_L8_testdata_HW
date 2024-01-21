@@ -3,7 +3,7 @@ package ru.tarabne.tests;
 import org.junit.jupiter.api.Test;
 import ru.tarabne.pages.RegistrationPage;
 
-import ru.tarabne.testData.RegistrationTestData;
+import ru.tarabne.testdata.RegistrationTestData;
 
 public class RegistrationPageObjectsTests extends TestBase {
 
@@ -15,7 +15,6 @@ public class RegistrationPageObjectsTests extends TestBase {
             userEmail = registrationTestData.userEmail,
             userGender = registrationTestData.userGender,
             phoneNumber = registrationTestData.phoneNumber,
-            birthdayDay = registrationTestData.birthdayDay,
             birthdayMonth = registrationTestData.birthdayMonth,
             birthdayYear = registrationTestData.birthdayYear,
             subject = registrationTestData.subject,
@@ -25,6 +24,7 @@ public class RegistrationPageObjectsTests extends TestBase {
             state = registrationTestData.state,
             city = registrationTestData.city,
             invalidPhoneNumber = registrationTestData.invalidPhoneNumber;
+    int birthdayDay = registrationTestData.birthdayDay;
 
 
     @Test
