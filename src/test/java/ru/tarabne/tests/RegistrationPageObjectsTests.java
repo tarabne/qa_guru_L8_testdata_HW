@@ -2,79 +2,62 @@ package ru.tarabne.tests;
 
 import org.junit.jupiter.api.Test;
 import ru.tarabne.pages.RegistrationPage;
-
 import ru.tarabne.testdata.RegistrationTestData;
 
 public class RegistrationPageObjectsTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
-    RegistrationTestData registrationTestData = RegistrationTestData.randomUser();
-
-    String firstName = registrationTestData.firstName,
-            lastName = registrationTestData.lastName,
-            userEmail = registrationTestData.userEmail,
-            userGender = registrationTestData.userGender,
-            phoneNumber = registrationTestData.phoneNumber,
-            birthdayMonth = registrationTestData.birthdayMonth,
-            birthdayYear = registrationTestData.birthdayYear,
-            subject = registrationTestData.subject,
-            hobby = registrationTestData.hobby,
-            picture = registrationTestData.picture,
-            currentAddress = registrationTestData.currentAddress,
-            state = registrationTestData.state,
-            city = registrationTestData.city,
-            invalidPhoneNumber = registrationTestData.invalidPhoneNumber;
-    int birthdayDay = registrationTestData.birthdayDay;
-
+    RegistrationTestData registrationTestData = new RegistrationTestData();
 
     @Test
     void fillFullFormTest() {
         registrationPage.openPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
-                .setGender(userGender)
-                .setUserNumber(phoneNumber)
-                .setDateOfBirth(birthdayDay, birthdayMonth, birthdayYear)
-                .setSubjects(subject)
-                .setHobbies(hobby)
-                .uploadPicture(picture)
-                .setCurrentAddress(currentAddress)
-                .setState(state)
-                .setCity(city)
+                .setFirstName(registrationTestData.firstName)
+                .setLastName(registrationTestData.lastName)
+                .setEmail(registrationTestData.userEmail)
+                .setGender(registrationTestData.userGender)
+                .setUserNumber(registrationTestData.phoneNumber)
+                .setDateOfBirth(registrationTestData.birthdayDay, registrationTestData.birthdayMonth, registrationTestData.birthdayYear)
+                .setSubjects(registrationTestData.subject)
+                .setHobbies(registrationTestData.hobby)
+                .uploadPicture(registrationTestData.picture)
+                .setCurrentAddress(registrationTestData.currentAddress)
+                .setState(registrationTestData.state)
+                .setCity(registrationTestData.city)
                 .submit();
 
-        registrationPage.checkResult("Student Name", firstName + " " +
-                        lastName)
-                .checkResult("Student Email", userEmail)
-                .checkResult("Gender", userGender)
-                .checkResult("Mobile", phoneNumber)
-                .checkResult("Date of Birth", birthdayDay + " " +
-                        birthdayMonth + "," + birthdayYear)
-                .checkResult("Subjects", subject)
-                .checkResult("Hobbies", hobby)
-                .checkResult("Picture", picture)
-                .checkResult("Address", currentAddress)
-                .checkResult("State and City", state + " " + city);
+        registrationPage.checkResult("Student Name", registrationTestData.firstName + " " +
+                        registrationTestData.lastName)
+                .checkResult("Student Email", registrationTestData.userEmail)
+                .checkResult("Gender", registrationTestData.userGender)
+                .checkResult("Mobile", registrationTestData.phoneNumber)
+                .checkResult("Date of Birth", registrationTestData.birthdayDay + " " +
+                        registrationTestData.birthdayMonth + "," + registrationTestData.birthdayYear)
+                .checkResult("Subjects", registrationTestData.subject)
+                .checkResult("Hobbies", registrationTestData.hobby)
+                .checkResult("Picture", registrationTestData.picture)
+                .checkResult("Address", registrationTestData.currentAddress)
+                .checkResult("State and City", registrationTestData.state +
+                        " " + registrationTestData.city);
     }
 
     @Test
     void fillOnlyRequiredFieldsFormTest() {
         registrationPage.openPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setGender(userGender)
-                .setUserNumber(phoneNumber)
-                .setDateOfBirth(birthdayDay, birthdayMonth, birthdayYear)
+                .setFirstName(registrationTestData.firstName)
+                .setLastName(registrationTestData.lastName)
+                .setGender(registrationTestData.userGender)
+                .setUserNumber(registrationTestData.phoneNumber)
+                .setDateOfBirth(registrationTestData.birthdayDay, registrationTestData.birthdayMonth, registrationTestData.birthdayYear)
                 .submit();
 
-        registrationPage.checkResult("Student Name", firstName + " " +
-                        lastName)
+        registrationPage.checkResult("Student Name", registrationTestData.firstName + " " +
+                        registrationTestData.lastName)
                 .checkResult("Student Email", "\t")
-                .checkResult("Gender", userGender)
-                .checkResult("Mobile", phoneNumber)
-                .checkResult("Date of Birth", birthdayDay + " " +
-                        birthdayMonth + "," + birthdayYear)
+                .checkResult("Gender", registrationTestData.userGender)
+                .checkResult("Mobile", registrationTestData.phoneNumber)
+                .checkResult("Date of Birth", registrationTestData.birthdayDay + " " +
+                        registrationTestData.birthdayMonth + "," + registrationTestData.birthdayYear)
                 .checkResult("Subjects", "\t")
                 .checkResult("Hobbies", "\t")
                 .checkResult("Picture", "\t")
@@ -95,10 +78,10 @@ public class RegistrationPageObjectsTests extends TestBase {
     @Test
     void phone9DigitsTest() {
         registrationPage.openPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setGender(userGender)
-                .setUserNumber(invalidPhoneNumber)
+                .setFirstName(registrationTestData.firstName)
+                .setLastName(registrationTestData.lastName)
+                .setGender(registrationTestData.userGender)
+                .setUserNumber(registrationTestData.invalidPhoneNumber)
                 .submit();
 
         registrationPage.registrationFailureCheck();
