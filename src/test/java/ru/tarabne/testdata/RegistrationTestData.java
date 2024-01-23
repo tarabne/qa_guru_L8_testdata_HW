@@ -9,7 +9,7 @@ public class RegistrationTestData {
             userEmail = faker.internet().emailAddress(),
             userGender = faker.options().option(genders),
             phoneNumber = faker.phoneNumber().subscriberNumber(10),
-            invalidPhoneNumber = faker.number().digits(9),
+            invalidPhoneNumber = faker.phoneNumber().subscriberNumber(9),
             birthdayMonth = faker.options().option(months),
             birthdayYear = String.valueOf(faker.number().numberBetween(1900, 2100)),
             subject = faker.options().option(subjects),
@@ -30,7 +30,7 @@ public class RegistrationTestData {
     static String[] states = {"NCR", "Uttar Pradesh", "Haryana", "Rajasthan"};
     static String[] genders = {"Male", "Female", "Other"};
 
-    public static String getRandomCity(String state) {
+    public String getRandomCity(String state) {
         switch (state) {
             case "NCR":
                 return faker.options().option("Delhi","Gurgaon","Noida");
